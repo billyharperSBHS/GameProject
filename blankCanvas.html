@@ -1,0 +1,78 @@
+<!doctype html>
+
+<body>
+    <canvas id="gameCanvas" width="600" height="600"></canvas>
+    <script>
+        var canvas, canvasContext;
+
+        window.onload = function() {
+            canvas = document.getElementById('gameCanvas');
+            canvasContext = canvas.getContext('2d');
+
+            document.addEventListener('keydown', keyPressed);
+            document.addEventListener('keyup', keyReleased);
+
+            setInterval(mainloop, 1000 / 50);
+        }
+
+        var playerXpos = 0;
+        var playerXpos = 40;
+        var playerYpos = 500;
+        var playerXspeed = 5;
+        var playerYspeed = -10;
+        const PLAYER_SIZE = 20;
+
+        const SPACE_KEY = 32;
+        var spaceKeyPressed = false;
+
+        function mainloop() {
+            colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
+            colorRect(playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE, '#5365ad'); // player
+            playerMove();
+        } // end func
+
+
+        function colorRect(x, y, w, h, c) {
+            canvasContext.fillStyle = c;
+            canvasContext.fillRect(x, y, w, h);
+        }
+
+        function keyPressed(evt) {
+            if (evt.keyCode == SPACE_KEY) {
+                spaceKeyPressed = true;
+
+
+
+            }
+
+        }
+
+        function keyReleased(evt) {
+            if (evt.keyCode == SPACE_KEY) {
+                spaceKeyPressed = false;
+
+            }
+        }
+
+        var gravity = 0.2;
+        var jumpPower = -5;
+        
+        function playerMove() {
+                playerYpos += playerYspeed;
+                playerYspeed += gravity;
+            
+            if(playerYpos + PLAYER_SIZE >= canvas.height){
+                playerYspeed = 0;
+                playerYpos = canvas.height - PLAYER_SIZE;
+            }
+            
+            
+            if (spaceKeyPressed) {
+                playerYspeed = jumpPower;
+
+
+            }
+        }
+
+    </script>
+</body>
