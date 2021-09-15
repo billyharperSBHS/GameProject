@@ -1,7 +1,7 @@
 <!doctype html>
 
 <body>
-    <canvas id="gameCanvas" width="600" height="600"></canvas>
+    <canvas id="gameCanvas" width="900" height="600"></canvas>
     <script>
         var canvas, canvasContext;
 
@@ -22,14 +22,29 @@
         var playerYspeed = -10;
         const PLAYER_SIZE = 20;
 
+        var enemyXpos = 870;
+        var enemyYpos = 580;
+        var enemyXspeed = 5;
+        const ENEMY_SIZE = 20;
+  
         const SPACE_KEY = 32;
         var spaceKeyPressed = false;
+
+        var obstacles = [];
 
         function mainloop() {
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
             colorRect(playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE, '#5365ad'); // player
             playerMove();
+            colorRect(enemyXpos, enemyYpos, ENEMY_SIZE, ENEMY_SIZE, 'Red'); // Enemy
+            enemyMove();
+        
         } // end func
+
+        function makeObstacle() {
+            var OBSTACLE_SIZE = 50;
+            var eXpos = Math.floor(Math.eNSOM() * (CANVAS.WIDTH - OBSTACLE_SIZE))
+        }
 
 
         function colorRect(x, y, w, h, c) {
@@ -40,39 +55,43 @@
         function keyPressed(evt) {
             if (evt.keyCode == SPACE_KEY) {
                 spaceKeyPressed = true;
-
-
-
             }
-
-        }
+        } // end func
 
         function keyReleased(evt) {
             if (evt.keyCode == SPACE_KEY) {
                 spaceKeyPressed = false;
-
-            }
+             }
         }
 
         var gravity = 0.2;
         var jumpPower = -5;
-        
+        var jumping = false;
+
         function playerMove() {
-                playerYpos += playerYspeed;
-                playerYspeed += gravity;
-            
-            if(playerYpos + PLAYER_SIZE >= canvas.height){
+            playerYpos += playerYspeed;
+            playerYspeed += gravity;
+
+            if (playerYpos + PLAYER_SIZE >= canvas.height) {
                 playerYspeed = 0;
                 playerYpos = canvas.height - PLAYER_SIZE;
+                jumping = false;
             }
-            
-            
-            if (spaceKeyPressed) {
+
+            if (spaceKeyPressed && jumping == false) {
                 playerYspeed = jumpPower;
-
-
+                jumping = true;
             }
         }
 
+         function enemyMove() {
+             enemyXpos -= enemyXspeed;
+             
+             if(enemyXpos < 0){
+                 enemyXpos = canvas.width - ENEMY_SIZE
+                 enemyXspeed = Math.floor(Math.random()*(15 - 4) + 4)
+            }
+             
+         } 
     </script>
 </body>
