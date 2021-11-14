@@ -57,11 +57,6 @@
 
         } // end func
 
-        function drawObj() {
-            objects.forEach(function(obj,i,array){
-                colorRect(obj.objXpos, obj.objYpos, obj.OBJ_SIZE, obj.OBJ_SIZE, 'red'); 
-            });
-        }
 
         
 
@@ -118,17 +113,25 @@
             objects.push(obj);
         }
         
+        function drawObj() {
+            objects.forEach(function(obj,i,array){
+                colorRect(obj.objXpos, obj.objYpos, obj.OBJ_SIZE, obj.OBJ_SIZE, 'red'); 
+            });
+        }
+        
         function enemyMove() {
-            enemyXpos -= enemyXspeed;
+            objects.forEach(function(obj,i,array){
+                obj.objXpos -= obj.objXspeed;
 
-            if (enemyXpos < 0) {
-                enemyXpos = canvas.width - ENEMY_SIZE
-                enemyXspeed = Math.floor(Math.random() * (15 - 4) + 4)
-            }
+                if (obj.objXpos < 0) {
+                    obj.objXpos = canvas.width - obj.OBJ_SIZE
+                    obj.objXspeed = Math.floor(Math.random() * (15 - 4) + 4)
+                }
 
-            if (enemyXpos + ENEMY_SIZE > playerXpos) {
-                console.log('hit');
-            }
+                if (obj.objXpos + obj.OBJ_SIZE > playerXpos) {
+                    console.log('hit');
+                }
+            });
         }
 
         
