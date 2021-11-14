@@ -14,31 +14,38 @@
 
             setInterval(mainloop, 1000 / 50);
         }
+        
+        var difficulty = '';
+        var pass = false;
+        
+        while(pass == false){
+            difficulty = prompt('what difficulty? easy medium or hard','easy');
+            if(difficulty == 'easy' || difficulty == 'medium' || difficulty == 'hard'){
+               pass = true;
+            }
+        }
 
         var playerXpos = 0;
         var playerXpos = 40;
-        var playerYpos = 500;
+        var playerYpos = 580;
         var playerXspeed = 5;
         var playerYspeed = -10;
         const PLAYER_SIZE = 20;
 
-        var enemyXpos = 870;
-        var enemyYpos = 580;
-        var enemyXspeed = 5;
-        const ENEMY_SIZE = 20;
-  
+
+
         const SPACE_KEY = 32;
         var spaceKeyPressed = false;
 
-        var obstacles = [];
+        var objects = [];
 
         function mainloop() {
-            colorRect(0, 0, canvas.width, canvas.height, 'black'); // bg
+            colorRect(0, 0, canvas.width, canvas.height, 'black'); // background
             colorRect(playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE, '#5365ad'); // player
             playerMove();
             colorRect(enemyXpos, enemyYpos, ENEMY_SIZE, ENEMY_SIZE, 'Red'); // Enemy
             enemyMove();
-        
+
         } // end func
 
         function makeObstacle() {
@@ -61,7 +68,7 @@
         function keyReleased(evt) {
             if (evt.keyCode == SPACE_KEY) {
                 spaceKeyPressed = false;
-             }
+            }
         }
 
         var gravity = 0.2;
@@ -83,15 +90,38 @@
                 jumping = true;
             }
         }
-
-         function enemyMove() {
-             enemyXpos -= enemyXspeed;
-             
-             if(enemyXpos < 0){
-                 enemyXpos = canvas.width - ENEMY_SIZE
-                 enemyXspeed = Math.floor(Math.random()*(15 - 4) + 4)
+ 
+        function makeObj(){
+            var objXspeed = Math.floor(Math.random()*(12 - 4)+ 4);
+            const OBJ_SIZE = 20;
+            var objYpos = canvas.height - OBJ_SIZE;
+            var objXpos = canvas.width - OBJ_SIZE;
+            
+            var obj = {
+                objXpos:objXpos,
+                objYpos:objYpos,
+                OBJ_SIZE:OBJ_SIZE,
+                objXspeed:objXspeed
             }
-             
-         } 
+            
+            objects.push(obj);
+        }
+        
+        function enemyMove() {
+            enemyXpos -= enemyXspeed;
+
+            if (enemyXpos < 0) {
+                enemyXpos = canvas.width - ENEMY_SIZE
+                enemyXspeed = Math.floor(Math.random() * (15 - 4) + 4)
+            }
+
+            if (enemyXpos + ENEMY_SIZE > playerXpos) {
+                console.log('hit');
+            }
+        }
+
+        
+   
+
     </script>
-</body>
+</body>  
