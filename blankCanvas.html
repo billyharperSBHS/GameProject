@@ -50,17 +50,20 @@
             }
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // background
             colorRect(playerXpos, playerYpos, PLAYER_SIZE, PLAYER_SIZE, '#5365ad'); // player
+            
             playerMove();
-            colorRect(enemyXpos, enemyYpos, ENEMY_SIZE, ENEMY_SIZE, 'Red'); // Enemy
+            drawObj()
             enemyMove();
 
         } // end func
 
-        function makeObstacle() {
-            var OBSTACLE_SIZE = 50;
-            var eXpos = Math.floor(Math.eNSOM() * (CANVAS.WIDTH - OBSTACLE_SIZE))
+        function drawObj() {
+            objects.forEach(function(obj,i,array){
+                colorRect(obj.objXpos, obj.objYpos, obj.OBJ_SIZE, obj.OBJ_SIZE, 'red'); 
+            });
         }
 
+        
 
         function colorRect(x, y, w, h, c) {
             canvasContext.fillStyle = c;
