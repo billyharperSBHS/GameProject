@@ -43,7 +43,7 @@
 
         function mainloop() {
             if(settingUp){
-               for(var i = 0; i < 10; i++){
+               for(var i = 0; i < 1; i++){
                    makeObj();
                }
                 settingUp = false;
@@ -128,8 +128,9 @@
                     obj.objXspeed = Math.floor(Math.random() * (15 - 4) + 4)
                 }
 
-                if (obj.objXpos + obj.OBJ_SIZE > playerXpos) {
+                if (obj.objXpos + obj.OBJ_SIZE > playerXpos && obj.objXpos < playerXpos + PLAYER_SIZE && obj.objYpos + obj.OBJ_SIZE > playerYpos && obj.objYpos < playerYpos + PLAYER_SIZE) {
                     console.log('hit');
+                    playerYpos = 0;
                 }
             });
         }
