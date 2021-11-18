@@ -40,12 +40,15 @@
         var objects = [];
         
         var settingUp = true;
+        var gamerun = true;
 
         function mainloop() {
+            if(gamerun){
+                
             if(settingUp){
-               for(var i = 0; i < 1; i++){
+               for(var i = 0; i < 10; i++){
                    makeObj();
-               }
+            }
                 settingUp = false;
             }
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // background
@@ -55,6 +58,9 @@
             drawObj()
             enemyMove();
 
+               }else{
+                   colorRect(0, 0, canvas.width, canvas.height, 'red'); // background
+               }
         } // end func
 
 
@@ -101,7 +107,7 @@
             var objXspeed = Math.floor(Math.random()*(12 - 4)+ 4);
             const OBJ_SIZE = 20;
             var objYpos = canvas.height - OBJ_SIZE;
-            var objXpos = canvas.width - OBJ_SIZE;
+            var objXpos = canvas.width + canvas.width;
             
             var obj = {
                 objXpos:objXpos,
@@ -129,14 +135,11 @@
                 }
 
                 if (obj.objXpos + obj.OBJ_SIZE > playerXpos && obj.objXpos < playerXpos + PLAYER_SIZE && obj.objYpos + obj.OBJ_SIZE > playerYpos && obj.objYpos < playerYpos + PLAYER_SIZE) {
-                    console.log('hit');
+                    gamerun=false;
                     playerYpos = 0;
                 }
             });
         }
-
-        
-   
 
     </script>
 </body>  
