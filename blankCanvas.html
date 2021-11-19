@@ -22,6 +22,10 @@
             difficulty = prompt('what difficulty? easy medium or hard','easy');
             if(difficulty == 'easy' || difficulty == 'medium' || difficulty == 'hard'){
                pass = true;
+                if(difficulty == medium){
+                    if(difficulty == hard)//difficulty
+                }
+                    
             }
         }
 
@@ -46,7 +50,7 @@
             if(gamerun){
                 
             if(settingUp){
-               for(var i = 0; i < 10; i++){
+               for(var i = 0; i < 5; i++){
                    makeObj();
             }
                 settingUp = false;
@@ -99,7 +103,7 @@
 
             if (spaceKeyPressed && jumping == false) {
                 playerYspeed = jumpPower;
-                jumping = true;
+                jumping = true; //player movement, control and gravity
             }
         }
  
@@ -113,7 +117,7 @@
                 objXpos:objXpos,
                 objYpos:objYpos,
                 OBJ_SIZE:OBJ_SIZE,
-                objXspeed:objXspeed
+                objXspeed:objXspeed //enemy creation and replication
             }
             
             objects.push(obj);
@@ -136,7 +140,7 @@
 
                 if (obj.objXpos + obj.OBJ_SIZE > playerXpos && obj.objXpos < playerXpos + PLAYER_SIZE && obj.objYpos + obj.OBJ_SIZE > playerYpos && obj.objYpos < playerYpos + PLAYER_SIZE) {
                     gamerun=false;
-                    playerYpos = 0;
+                    playerYpos = 0; //collision
                 }
             });
         }
